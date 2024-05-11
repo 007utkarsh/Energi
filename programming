@@ -1,0 +1,50 @@
+We have a text file containing a list of students' names and their corresponding scores in a particular subject. 
+We want to extract the names of students who scored above a certain threshold.
+
+Here's the content of the students.txt file:
+Copy code
+Alice 85
+Bob 73
+Charlie 92
+David 65
+Emily 78
+Frank 88
+Grace 91
+
+Let's say the passing threshold is 80. 
+We want to extract the names of students who scored above 80.
+
+We can solve this problem using awk and grep.
+
+Solution using AWK:
+awk '$2 > 80 { print $1 }' students.txt
+This command will output:
+Copy code
+Alice
+Charlie
+Frank
+Grace
+
+Using grep solution just matching the regix and using cut
+
+grep -E '^[^\s]+ [89][0-9]' students.txt | cut -d' ' -f1
+
+and using python -
+
+# Define the passing threshold
+threshold = 80
+
+# Read the contents of the file
+with open('students.txt', 'r') as file:
+    # Iterate through each line in the file
+    for line in file:
+        # Split each line into name and score
+        name, score = line.strip().split()
+        
+        # Convert score to an integer
+        score = int(score)
+        
+        # Check if the score is above the threshold
+        if score > threshold:
+            # Print the name of the student
+            print(name)
